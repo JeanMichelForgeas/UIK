@@ -1,0 +1,127 @@
+*******************************************************************************
+*                                                                             *
+* UIK's ObjProgress.doc                                                       *
+*                                                                             *
+* Explications sur l'objet UIKOBJ_Progress, v1.20 (20/9/91)                   *
+*                                                                             *
+* Created 20/9/91 Frédéric DENIS, The Software Laboratory.                    *
+*                                                                             *
+*******************************************************************************
+
+Introduction :
+~~~~~~~~~~~~~~
+
+      A quoi peut bien servir cet objet? Je m'en vais tout de suite vous donner
+un exemple : Quand vous vous trouvez devant un logiciel de ray-tracing, vous
+aimeriez bien savoir, après quelques heures de calcul, où en est votre image?
+Eh bien voici l'outil idéal qui va vous éviter de vous endormir devant votre
+cher ordinateur. Le principe est de montrer à tout moment, lors d'un traitement
+quelconque, généralement long, l'état d'avancement dudit traitement.
+
+Installation :
+~~~~~~~~~~~~~~
+
+      Commençons par voir ce dont vous aurez besoin...
+
+      1) Compilateur C, ou un assembleur digne de ce nom (SEKA, s'abstenir...)
+
+      2) Une version du célèbre UIK, de J.M. FORGEAS, de préférence v0.987 ou
+         supérieure.
+
+      3) Un bon tube d'aspirine, si possible plein. (Nan, je rigole, c'est
+         simple comme tout.)
+
+      4) C'est tout.
+
+      Venons-en au fait : L'objet UIKObj_Progress est un objet résidant sur
+disque. C'est à dire qu'il se trouve dans le répertoire UIK:Objects/ de votre
+unité de disque (Disque dur, ou Disquette). Si UIK n'est pas déja installé sur
+votre machine, réferrez-vous à la documentation fournie avec UIK.
+      Donc, pour utiliser pleinement ce nouvel objet, vous devez copier le
+fichier UIKObj_Progress, qui se trouve dans le répertoire UIK/Objects/ de la
+disquette dans le répertoire UIK:Objects/.
+
+      Vous devez ensuite copier les Includes (C et Assembleur) dans les
+répertoires correspondants. Le plus souvent, les includes spécifiques à UIK
+se trouvent dans le répertoire UIKI:.
+
+Description de l'objet :
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+      L'objet Progress est un objet d'affichage. Par le fait, il ne vous
+servira qu'à informer l'utilisateur de votre logiciel de l'avancement d'un
+travail. Le principe est simple : l'objet fonctionne selon le principe d'une
+gauge. Si, par exemple, votre application doit traiter en tout, 200 choses,
+et que à un moment précis elle n'en a traité que 50, l'objet montrera un
+cadre rempli à 25%, soit au quart.
+      Comment initialiser l'objet? Vous devez lui indiquer le nombre total de
+positions (ou de choses) qui vont être à traiter, puis, régulièrement, vous
+lui indiquerez le nombre de choses qui ont été traitées. Ceci dit, passons aux
+choses sérieuses...
+
+Programmation de l'objet :
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      Pour définir l'objet Progress, vous devez définir une TagList (ou liste
+d'étiquettes) qui va contenir les diverses informations nécessaires à l'objet.
+
+      Commençons par les Tags propres à l'objet Progress :
+
+      'UIKTAG_OBJProgress_Total'    va vous permettre de définir le nombre de
+                                    positions possibles de l'indicateur.
+                                    (Ex: 100)
+      'UIKTAG_OBJProgress_Pos'      définit, lui, la position de départ.
+                                    (Ex: 30)
+      'UIKTAG_OBJProgress_DonePen'  correspond à la couleur utilisée pour
+                                    la représentation des positions traitées.
+                                    (Ex: UIKCOL_LIGHT)
+                                    La valeur prise par défaut est
+                                    UIKCOL_BLACK.
+      'UIKTAG_OBJProgress_ToDoPen'  correspond à la couleur utilisée pour
+                                    la représentation des positions à traiter.
+                                    La valeur prise par défaut est
+                                    UIKCOL_GREY.
+      'UIKTAG_OBJProgress_RenderMode' va définir le mode de rendu utilisé par
+                                    l'objet. Il existe pour la version 1.20,
+                                    8 modes possibles, qui sont :
+
+         PROG_RenderFromLeft........Rendu à partir de la gauche
+         PROG_RenderFromRight.......Rendu à partir de la droite
+         PROG_RenderFromTop.........Rendu à partir du haut
+         PROG_RenderFromBottom......Rendu à partir du bas
+         PROG_RenderFromUpperLeft...Rendu à partir du coin haut gauche
+         PROG_RenderFromUpperRight..Rendu à partir du coin haut droit
+         PROG_RenderFromLowerLeft...Rendu à partir du coin bas gauche
+         PROG_RenderFromLowerRight..Rendu à partir du coin bas droit
+
+                                    Le mode de rendu par défaut est
+                                    PROG_RenderFromLeft.
+
+      En plus des tags propres à cet objet, vous pouvez utiliser les tags
+standards de UIK comme UIKTAG_OBJ_BoxFl_Over, qui aura pour cause de faire
+ressortir l'objet, UIKTAG_OBJ_BoxFl_NotDrawn, empêchera le cadre de se tracer,
+ainsi que les autres. Il est à noter que quelques tags standards de UIK seront
+sans effet. Par exemple, le tag UIKTAG_OBJ_BoxFl_Filled ne servira à rien, du
+fait que l'objet vous permet de définir la couleur qui sera utilisée pour le
+fond.
+
+Mise à jour de l'objet :
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+      L'objet Progress possède une fonction publique permettant de le mettre
+à jour. C'est par l'intermédiaire de cette fonction que vous indiquerez les
+changement de position.
+
+      L'appel depuis votre application se fait comme suit :
+
+UIK_CallObjectFunc( obj, UIKFUNC_Progress_ChangeProgress, Total, Position);
+
+      struct UIKObjProgress *obj; // pointeur sur la structure de l'objet
+      int Total; // Nouveau nombre de positions au total (-1 si pas de
+                 // changement.
+      int Position; // Nouvelle position (-1 si pas de changement).
+
+
+
+      N.B. : Voyez le programme et le source ci-joins ( test et test.c) pour un
+exemple des possibilités de l'objet Progress.
