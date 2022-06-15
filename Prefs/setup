@@ -1,0 +1,5 @@
+Assign lci: includes
+Assign exe: exe
+Assign src: src
+
+cd src:

@@ -1,0 +1,261 @@
+    OPT O+,W-
+        OPT d+
+****************************************************************
+*
+*       Project:    UIK
+*       Function:   prop gadget
+*
+*       Created:    17/09/90    Jean-Michel Forgeas
+*
+****************************************************************
+
+        IDNT    objpropa
+
+
+******* Includes ************************************************
+
+        INCDIR  "include:"
+
+        INCLUDE "intuition/intuition.i"
+        INCLUDE "uiki:uikobj.i"
+        INCLUDE "uiki:objproplift.i"
+        INCLUDE "uiki:uikbox.i"
+        INCLUDE "uiki:uikmacros.i"
+
+
+******* Imported ************************************************
+
+        XREF    LockObjVars
+        XREF    UnlockObjVars
+        XREF    _UIK_LockObjVars
+        XREF    _UIK_UnlockObjVars
+        XREF    _IntUIK_SetPropVars
+        XREF    _IntUIK_SetPropPos
+        XREF    _IntUIK_DrawKnob
+
+
+******* Exported ************************************************
+
+        ;XDEF    _UIK_OPr_ChangePropGadget
+        ;XDEF    _UIK_OPr_ChangePropNoDraw
+
+        XDEF    _HdlUIK_InactivePropGad
+        XDEF    _HdlUIK_ActivePropGad
+        XDEF    _HdlUIK_MovePropGad
+
+
+        SECTION text,CODE
+
+
+*************************************
+*   HdlUIK_InactivePropGad()
+*   HdlUIK_ActivePropGad()
+*   HdlUIK_MovePropGad()
+*   installées par AddPropGadget()
+*   appelée par do_gadget
+*   donc a3=message a1=objet
+*************************************
+
+_HdlUIK_InactivePropGad
+    bsr     LockObjVars
+    pea     UnlockObjVars(pc)
+    move.l  a1,-(sp)
+    bsr     _IntUIK_SetPropVars
+    move.l  (sp),a1
+    cmp.w   #-1,uop_MouseStart(a1)
+    beq.b   .end
+    move.l  (sp),a1
+    bsr     _IntUIK_DrawKnob
+    clr.l   uop_SaveKnob(a1)
+    clr.l   uop_SaveKnob+4(a1)
+    move.l  uop_KnobNorAutomate(a1),uop_KnobAutomate(a1)
+    bsr     _IntUIK_DrawKnob
+.end
+    move.l  (sp)+,a1
+    move.b  #0,uop_Moving(a1)
+    rts
+
+
+_HdlUIK_ActivePropGad
+    cmp.w   #-1,uop_VisPC(a1)
+    beq     PropCancel
+    bsr     LockObjVars
+    pea     UnlockObjVars(pc)
+
+    moveq   #0,d1
+    move.l  uo_rq(a1),d0                d0 = requester
+    beq.b   .win                        si pas de requester
+    exg.l   d0,a1                       indicateurs non affectes
+    move.l  rq_LeftEdge(a1),d1          offset du requester
+    exg.l   d0,a1                       indicateurs non affectes
+
+.win
+    tst.b   uop_Ver(a1)
+    bne.b   .vert
+.horiz
+    move.w  im_MouseX(a3),a0
+    move.w  uo_Box+box_Left(a1),d0
+    swap    d1
+    add.w   d1,d0                   ajoute abscisse du requester
+    bra.b   .both
+.vert
+    move.w  im_MouseY(a3),a0
+    move.w  uo_Box+box_Top(a1),d0
+    add.w   d1,d0                   ajoute ordonnée du requester
+.both
+    move.w  a0,d1
+    sub.w   d0,d1
+    subq.w  #1,d1                   offset dans le container
+    moveq   #0,d0
+    move.w  uop_Pos(a1),d0
+    sub.w   uop_KnobOffs(a1),d1     offset dans knob
+    ;bmi.b   .inf
+    bcs.b   .inf
+    sub.w   uop_KnobWidth(a1),d1    apres le knob ?
+    ;bpl.b   .sup
+    bcc.b   .sup
+.active
+    move.b  #1,uop_Moving(a1)
+    move.w  a0,uop_MouseStart(a1)
+    move.l  a1,-(sp)
+    clr.l   uop_SaveKnob(a1)
+    clr.l   uop_SaveKnob+4(a1)
+    move.l  uop_KnobAltAutomate(a1),uop_KnobAutomate(a1)
+    bsr     _IntUIK_DrawKnob
+    move.l  (sp)+,a1
+    ;bra.b   PropCancel
+    rts
+
+.inf
+    sub.w   uop_Vis(a1),d0                  deplacement negatif
+    ;bpl.b   .calc
+    bcc.b   .calc
+    moveq   #0,d0
+    bra.b   .calc
+.sup
+    add.w   uop_Vis(a1),d0                  deplacement positif
+.calc
+    move.w  d0,uop_Pos(a1)
+    move.w  #-1,uop_MouseStart(a1)
+    move.l  a1,-(sp)
+    bsr     _IntUIK_SetPropVars
+    bsr     _IntUIK_DrawKnob
+    move.l  (sp)+,a1
+    rts
+
+
+_HdlUIK_MovePropGad
+    bsr     LockObjVars
+    pea     UnlockObjVars(pc)
+    move.w  im_MouseY(a3),a0
+    tst.b   uop_Ver(a1)
+    bne.b   .vert
+.horiz
+    move.w  im_MouseX(a3),a0
+.vert
+    move.w  uop_MouseStart(a1),d1
+    bmi.s   PropCancel
+    move.w  a0,d0
+    sub.w   d1,d0                           d0 = deplacement
+PropCommon
+    moveq   #0,d1                           d1 = limite gauche
+    add.w   uop_KnobOffs(a1),d0             d0 = new knob offset
+    bmi.b   PropKnobOut
+    move.w  uop_ContWidth(a1),d1            -- supérieur ou égal
+    sub.w   uop_KnobWidth(a1),d1            d1 = maxi knob offset
+    cmp.w   d0,d1                           new < maxi ?
+    bmi.b   PropKnobOut
+PropDrawKnob
+    cmp.w   uop_KnobOffs(a1),d0             meme position ?
+    beq.b   PropCancel
+    move.w  d0,uop_KnobOffs(a1)
+    move.w  a0,uop_MouseStart(a1)
+    move.l  a1,-(sp)
+    bsr     _IntUIK_SetPropPos
+    ;move.l  (sp),a1
+    bsr     _IntUIK_DrawKnob
+    move.l  (sp)+,a1
+    rts
+
+PropCancel
+    moveq   #0,d2                           cancel message
+    rts
+
+PropKnobOut
+    move.w  d1,d0                           collé à gauche
+    bra.b   PropDrawKnob
+
+
+*************************************
+        END
+*************************************
+
+************************************************************************
+*   UIK_OPr_ChangePropGadget(
+*      struct UIKObjPropGad *obj, int Total, int Visible, int Position )
+*                            a0       a1         d0           d1
+************************************************************************
+
+_UIK_OPr_ChangePropGadget
+    bsr     _UIK_LockObjVars
+
+    cmp.l   #-1,d0
+    beq.b   .no_visible
+    move.w  d0,uop_Vis(a0)
+.no_visible
+    moveq   #-1,d0
+    cmp.l   d0,a1
+    beq.b   .no_total
+    move.w  a1,uop_Tot(a0)
+.no_total
+
+    tst.b   uop_Moving(a0)          ;-----------------
+    bne.b   .end
+
+    cmp.l   d0,d1
+    beq.b   .no_position
+    move.w  d1,uop_Pos(a0)
+.no_position
+    move.l  a0,-(sp)
+    bsr     _IntUIK_SetPropVars
+    bsr     _IntUIK_DrawKnob
+    move.l  (sp)+,a0                ;------------------
+.end
+    bsr     _UIK_UnlockObjVars
+    rts
+
+
+************************************************************************
+*   UIK_OPr_ChangePropNoDraw(
+*      struct UIKObjPropGad *obj, int Total, int Visible, int Position )
+*                            a0       a1         d0           d1
+************************************************************************
+
+_UIK_OPr_ChangePropNoDraw
+    bsr     _UIK_LockObjVars
+
+    cmp.l   #-1,d0
+    beq.b   .no_visible
+    move.w  d0,uop_Vis(a0)
+.no_visible
+    moveq   #-1,d0
+    cmp.l   d0,a1
+    beq.b   .no_total
+    move.w  a1,uop_Tot(a0)
+.no_total
+
+    tst.b   uop_Moving(a0)          ;-----------------
+    bne.b   .end
+
+    cmp.l   d0,d1
+    beq.b   .no_position
+    move.w  d1,uop_Pos(a0)
+.no_position
+    move.l  a0,-(sp)
+    bsr     _IntUIK_SetPropVars
+    move.l  (sp)+,a0                ;------------------
+.end
+    bsr     _UIK_UnlockObjVars
+    rts
+
+

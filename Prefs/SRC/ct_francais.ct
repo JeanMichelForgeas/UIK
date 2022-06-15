@@ -1,0 +1,280 @@
+## version $VER: uikprefs.catalog 2.0 (3.3.93)
+## codeset 0
+## language français
+;
+MSG_NULLSTRING
+
+;
+;
+MSG_FRAME_GAD
+Cadre
+; Frame
+;
+MSG_LOCALE_GAD
+Local
+; Localized
+;
+MSG_SAVE_GAD
+Sauvegarder
+; Save
+;
+MSG_HELP_GAD
+Aide
+; Help
+;
+MSG_TEST_GAD
+Test
+; Test
+;
+MSG_LIGHT_GAD
+Clair
+; Light
+;
+MSG_DARK_GAD
+Foncé
+; Dark
+;
+MSG_SPECIAL_GAD
+Spécial
+; Special
+;
+MSG_MEDIUM_GAD
+Medium
+; Medium
+;
+MSG_TITLE_HELPWINDOW
+UIKPrefs Aide
+; UIKPrefs Help
+;
+MSG_LANGUAGE_FRAME
+ Langage\x20
+;  Language\x20
+;
+MSG_ENGLISH_GAD
+Anglais
+; English
+;
+MSG_OTHER_GAD
+Autre
+; Other
+;
+MSG_COLORS_FRAME
+ Couleurs\x20
+;  Colors\x20
+;
+MSG_DEFSCREEN_FRAME
+ Choix écran\x20
+;  Default screen\x20
+;
+MSG_WORKBENCH_GAD
+Workbench
+; Workbench
+;
+MSG_UIK_GAD
+UIK
+; UIK
+;
+MSG_MODE_FRAME
+ Mode\x20
+;  Mode\x20
+;
+MSG_FONT_FRAME
+ Fonte\x20
+;  Font\x20
+;
+MSG_UIKSCREEN_FRAME
+ Ecran UIK\x20
+;  UIK screen\x20
+;
+MSG_USE_GAD
+Utiliser
+; Use
+;
+MSG_CANCEL_GAD
+Annuler
+; Cancel
+;
+MSG_NULLSTRING2
+
+;
+MSG_COLORS_PAL
+Couleurs
+;
+MSG_R_PAL
+R
+;
+MSG_G_PAL
+V
+;
+MSG_B_PAL
+B
+;
+MSG_RESTORE_PAL
+_Remettre
+;
+MSG_NULLSTRING3
+
+;
+MSG_PROJECT_MENU
+Projet
+;
+MSG_PROJECT_OPEN_MENU
+Ouvrir...
+;
+MSG_PROJECT_SAVEAS_MENU
+Sauver en...
+;
+MSG_PROJECT_QUIT_MENU
+Quitter
+;
+MSG_EDIT_MENU
+Edition
+;
+MSG_EDIT_RESET_MENU
+Valeurs par défaut
+;
+MSG_EDIT_LAST_MENU
+Dernières valeurs sauvées
+;
+MSG_EDIT_RESTORE_MENU
+Valeurs initiales
+;
+MSG_SETTINGS_MENU
+Options
+;
+MSG_SETTINGS_CRICON_MENU
+Créer icônes?
+;
+MSG_ENTER_FONT_NAME
+Entrer un nom de fonte point sa hauteur\nExemple: Topaz.11
+;
+MSG_INPUT_MODES
+Modes d'entrée
+;
+MSG_INPUT_MOUSE
+Souris
+;
+MSG_INPUT_BOURIS
+Bouris
+;
+MSG_INPUT_JOYMOUSE
+JoyMouse
+;
+MSG_INPUT_1
+1 Contact
+;
+MSG_INPUT_2
+2 Contacts
+;
+MSG_INPUT_3
+5 Contacts
+;
+MSG_INPUT_AUTO
+Automatique
+;
+MSG_INPUT_HOLD
+Maintient
+;
+MSG_INPUT_TIMES
+ Temps\x20
+;
+MSG_INPUT_SPEED
+Défilement
+;
+MSG_INPUT_VALID
+Validation
+;
+MSG_INPUT_UNSELECT
+Relâchement
+;
+MSG_INPUT_THICK
+Epaisseur du cadre
+;
+MSG_HELP_TEXT
+Grâce à UIKPrefs vous pouvez changer l'aspect\n\
+visuel des programmes construits autour de la\n\
+librairie 'uik.library'.\n\
+Vous pouvez changer beaucoup de choses, comme la\n\
+police par défaut, les valeurs des couleur, leur\n\
+assignation, le mode d'entrée, le mode d'écran,\n\
+le langage...\n\
+Sous 3.0 la palette utilise la roue des couleurs\n\
+mais si vous préférez les ascenceurs appuyez sur\n\
+alt ou shift en même temps que sur le gadget qui\n\
+ouvre la palette.\n\
+Ce programme possède un aspect 3D convexe si les\n\
+couleurs de votre Workbench le permettent. Sinon\n\
+réassignez les couleurs de UIK grâce au cadre\n\
+intitulé 'Couleurs':\n\
+L'interface UIK comporte ses propres registres\n\
+de couleur. On associe chaque carré de couleur\n\
+à une couleur du Workbench en cliquant sur les\n\
+carrés.\n\
+Pour que ces modifications soient prises en\n\
+compte et puissent être sauvegardées, elle\n\
+doivent être testées avec le bouton 'Test'.\n\
+MEDIUM est en général le registre utilisé pour\n\
+la couleur du fond des fenêtres et des autres\n\
+objets. Un gris clair par exemple.\n\
+CLAIR et FONCE servent à donner l'impression de\n\
+relief donc il est préférable de leur associer\n\
+des teintes se rapprochant le plus du blanc et\n\
+du noir.\n\
+SPECIAL peut être utilisé pour montrer une\n\
+sélection, l'activation d'une fenêtre, pour\n\
+dessiner, etc...\n\
+CADRE est la couleur de détourage des zones\n\
+sélectionnables par un des modes d'entrée par\n\
+contacts.\n\
+Si la couleur SPECIAL est intermédiaire entre\n\
+MEDIUM et FONCE, sélectionnez le bouton juste à\n\
+droite de "Test", ce sera plus agréable.\n\
+N'oubliez pas de valider avec le bouton "Test".\n\
+Le langage choisi dans l'interface peut l'être \n\
+parmis deux, fournis par le programmeur.\n\
+Il lui est conseillé de fournir l'anglais plus\n\
+le langage de son choix.\n\
+Selon la version du système, des catalogues de\n\
+langages suplémentaires peuvent être pris en\n\
+compte.\n\
+Les fenêtres des applications UIK peuvent être\n\
+redirigées vers un écran autre que celui du\n\
+système.\n\
+Vos préférences sont sauvegardées soit:\n\
+ par APServer si il est present,\n\
+ ou en "ENV:uik/uik.prefs"/"ENVARC:uik/uik.prefs",\n\
+ ou en "S:uik.prefs",\n\
+ ou en "UIK:uik.prefs"\n\
+Raccourcis clavier :\n\
+1 Couleur claire\n\
+2 Couleur foncée\n\
+3 Couleur spéciale\n\
+4 Couleur medium\n\
+5 Couleur du cadre\n\
+6 Couleur\n\
+X Activation de la couleur de surlignage\n\
+T Test des couleurs\n\
+W Workbench\n\
+K UIK\n\
+F Fonte\n\
+M Mode de sélection\n\
+C Palette\n\
+D Mode d'affichage\n\
+L Locale\n\
+S Sauvegarder\n\
+U Utiliser\n\
+A Annuler\n\
+O Look UIK/Sys
+;
+MSG_SELECT_FONT
+Choix d'une Police
+;
+MSG_LOOK
+Surligne
+;
+MSG_SYSLOOK
+Look Sys
+;
+MSG_UIKLOOK
+Look UIK
+;

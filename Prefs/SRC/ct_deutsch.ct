@@ -1,0 +1,147 @@
+## version $VER: uikprefs.catalog 2.0 (3.3.93)
+## codeset 0
+## language deutsch
+;
+MSG_NULLSTRING
+
+;
+;
+MSG_FRAME_GAD
+Rahmen
+; Frame
+;
+MSG_LOCALE_GAD
+Landes
+; Localized
+;
+MSG_SAVE_GAD
+Speichern
+; Save
+;
+MSG_HELP_GAD
+Hilfe
+; Help
+;
+MSG_TEST_GAD
+Test
+; Test
+;
+MSG_LIGHT_GAD
+Hell
+; Light
+;
+MSG_DARK_GAD
+Dunkel
+; Dark
+;
+MSG_SPECIAL_GAD
+Special
+; Special
+;
+MSG_MEDIUM_GAD
+Vermittlung
+; Medium
+;
+MSG_TITLE_HELPWINDOW
+UIKPrefs hilfe
+; UIKPrefs Help
+;
+MSG_LANGUAGE_FRAME
+ Sprachen\x20
+;  Language\x20
+;
+MSG_ENGLISH_GAD
+Englisch
+; English
+;
+MSG_OTHER_GAD
+Andere
+; Other
+;
+MSG_COLORS_FRAME
+ Farben\x20
+;  Colors\x20
+;
+MSG_DEFSCREEN_FRAME
+ Schirm\x20
+;  Default screen\x20
+;
+MSG_WORKBENCH_GAD
+Workbench
+; Workbench
+;
+MSG_UIK_GAD
+UIK
+; UIK
+;
+MSG_MODE_FRAME
+ Methode\x20
+;  Mode\x20
+;
+MSG_FONT_FRAME
+ Font\x20
+;  Font\x20
+;
+MSG_UIKSCREEN_FRAME
+ Shirm UIK\x20
+;  UIK screen\x20
+;
+MSG_USE_GAD
+Benutzen
+; Use
+;
+MSG_CANCEL_GAD
+Abbrechen
+; Cancel
+;
+MSG_NULLSTRING2
+
+;
+MSG_COLORS_PAL
+Farben
+;
+MSG_R_PAL
+R
+;
+MSG_G_PAL
+G
+;
+MSG_B_PAL
+B
+;
+MSG_RESTORE_PAL
+_Restore
+;
+MSG_NULLSTRING3
+
+;
+MSG_PROJECT_MENU
+Projekt
+;
+MSG_PROJECT_OPEN_MENU
+öffnen ...
+;
+MSG_PROJECT_SAVEAS_MENU
+speichern als ...
+;
+MSG_PROJECT_QUIT_MENU
+beenden
+;
+MSG_EDIT_MENU
+Vorgaben
+;
+MSG_EDIT_RESET_MENU
+auf Vorgaben zurücksetzen
+;
+MSG_EDIT_LAST_MENU
+auf zuletzt gespeichertes
+;
+MSG_EDIT_RESTORE_MENU
+auf vorherigen Stand
+;
+MSG_SETTINGS_MENU
+Optionen
+;
+MSG_SETTINGS_CRICON_MENU
+Piktogramme erzeugen?
+;

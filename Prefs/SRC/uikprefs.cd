@@ -1,0 +1,182 @@
+##header UIKPREFS_STR
+;
+MSG_NULLSTRING (/0/0)
+
+;
+MSG_FRAME_GAD (//)
+Frame
+;
+MSG_LOCALE_GAD (//)
+Localized
+;
+MSG_SAVE_GAD (//)
+Save
+;
+MSG_HELP_GAD (//)
+Help
+;
+MSG_TEST_GAD (//)
+Test
+;
+MSG_LIGHT_GAD (//)
+Light
+;
+MSG_DARK_GAD (//)
+Dark
+;
+MSG_SPECIAL_GAD (//)
+Special
+;
+MSG_MEDIUM_GAD (//)
+Medium
+;
+MSG_TITLE_HELPWINDOW (//)
+UIKPrefs Help
+;
+MSG_LANGUAGE_FRAME (//)
+ Language\x20
+;
+MSG_ENGLISH_GAD (//)
+English
+;
+MSG_OTHER_GAD (//)
+Other
+;
+MSG_COLORS_FRAME (//)
+ Colors\x20
+;
+MSG_DEFSCREEN_FRAME (//)
+ Default screen\x20
+;
+MSG_WORKBENCH_GAD (//)
+Workbench
+;
+MSG_UIK_GAD (//)
+UIK
+;
+MSG_MODE_FRAME (//)
+ Mode\x20
+;
+MSG_FONT_FRAME (//)
+ Font\x20
+;
+MSG_UIKSCREEN_FRAME (//)
+ UIK screen\x20
+;
+MSG_USE_GAD (//)
+Use
+;
+MSG_CANCEL_GAD (//)
+Cancel
+;
+MSG_NULLSTRING2 (/0/0)
+
+;
+MSG_COLORS_PAL (//)
+Colors
+;
+MSG_R_PAL (//)
+R
+;
+MSG_G_PAL (//)
+G
+;
+MSG_B_PAL (//)
+B
+;
+MSG_RESTORE_PAL (//)
+Restore
+;
+MSG_NULLSTRING3 (/0/0)
+
+;
+MSG_PROJECT_MENU (//)
+
+;
+MSG_PROJECT_OPEN_MENU (//)
+
+;
+MSG_PROJECT_SAVEAS_MENU (//)
+
+;
+MSG_PROJECT_QUIT_MENU (//)
+
+;
+MSG_EDIT_MENU (//)
+
+;
+MSG_EDIT_RESET_MENU (//)
+
+;
+MSG_EDIT_LAST_MENU (//)
+
+;
+MSG_EDIT_RESTORE_MENU (//)
+
+;
+MSG_SETTINGS_MENU (//)
+
+;
+MSG_SETTINGS_CRICON_MENU (//)
+
+;
+MSG_ENTER_FONT_NAME (//)
+
+;
+MSG_INPUT_MODES (//)
+
+;
+MSG_INPUT_MOUSE (//)
+
+;
+MSG_INPUT_BOURIS (//)
+
+;
+MSG_INPUT_JOYMOUSE (//)
+
+;
+MSG_INPUT_1 (//)
+
+;
+MSG_INPUT_2 (//)
+
+;
+MSG_INPUT_3 (//)
+
+;
+MSG_INPUT_AUTO (//)
+
+;
+MSG_INPUT_HOLD (//)
+
+;
+MSG_INPUT_TIMES (//)
+
+;
+MSG_INPUT_SPEED (//)
+
+;
+MSG_INPUT_VALID (//)
+
+;
+MSG_INPUT_UNSELECT (//)
+
+;
+MSG_INPUT_THICK (//)
+
+;
+MSG_HELP_TEXT (//)
+
+;
+MSG_SELECT_FONT (//)
+
+;
+MSG_LOOK (//)
+
+;
+MSG_SYSLOOK (//)
+
+;
+MSG_UIKLOOK (//)
+
+;
