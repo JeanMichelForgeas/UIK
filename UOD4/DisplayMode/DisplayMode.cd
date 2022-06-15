@@ -1,0 +1,80 @@
+NULL_STRING (0/0/0)
+
+;
+MODE_TITLE (1/1/20)
+Display modes
+;
+FRAME_TITLE (2/1/20)
+ Properties\x20
+;
+MIN_OSCANT (3/1/20)
+Standard
+;
+TEXT_OSCANT (4/1/20)
+Text overscan
+;
+GFX_OSCANT (5/1/20)
+Gfx. overscan
+;
+MAX_OSCANT (6/1/20)
+Max. overscan
+;
+CUSTOM_SIZE (7/1/20)
+Custom size
+;
+SHADES (8/1/20)
+Palette
+;
+COLORS (9/1/20)
+Max. colors
+;
+S_HAM (10/1/30)
+Supports H.A.M.
+;
+S_EXTRA (11/1/30)
+Supports EXTRA HALFBRITE
+;
+COLOR_TITLE (12/1/20)
+ Colors\x20
+;
+WIDTH_TITLE (13/1/20)
+Width :
+;
+HEIGHT_TITLE (14/1/20)
+Height :
+;
+PALLOWRESLACED (15/1/32)
+PAL: Low Res Laced
+;
+PALLOWRES (16/1/32)
+PAL: Low Res
+;
+PALHIGHRESLACED (17/1/32)
+PAL: High Res Laced
+;
+PALHIGHRES (18/1/32)
+PAL: High Res
+;
+NTSCLOWRESLACED (19/1/32)
+NTSC: Low Res Laced
+;
+NTSCLOWRES (20/1/32)
+NTSC: Low Res
+;
+NTSCHIGHRESLACED (21/1/32)
+NTSC: High Res Laced
+;
+NTSCHIGHRES (22/1/32)
+NTSC: High Res
+;
+IS_LACED (23/1/20)
+Interlaced
+;
+IS_ECS (24/1/20)
+Requires ECS
+;
+IS_GENLOCK (25/1/20)
+Supports genlock
+;
+IS_DRAGGABLE (26/1/20)
+Draggable

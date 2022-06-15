@@ -1,0 +1,26 @@
+
+   Subject : Display Database inquiries
+
+   Well, I had not long ago to check in the graphics.library display
+database, to get informations about the display modes available in
+the system (I was working on a Prefs/ScreenMode-like application).
+   As far as I could see, I could only get information for what I'll
+name the basic display modes, that is when I got informations for a
+'PAL:low res' mode, the PropertyFlags of this mode didn't reflect
+the capability to set this mode in HAM, neither in EHB.
+   The modes I checked were the ones whose ID was given by the
+NextDisplayInfo() function, and then getting the DIHandle associated
+with them, if it exists.
+   The only way I found to know if a mode could be set in either HAM
+or EHB, was to add the HAM_ or EXTRAHALFBRITE_ key to the DisplayID
+I was checking, and do a ModeNotAvailable() with the new ID I got.
+I guess this could work with further revisions of the OS, since I only
+use the bits in the MODE_KEY word, but it is said in the RKM that we
+shouldn't interpret the bits of the IDs directly. It's maybe subtle,
+but I also guess that the way I did my checking is a sort of direct
+interpretation.
+   It is correct that the PropertyFlags, who are supposed to reflect
+a mode's potential properties (as the other informations such as
+MaxDepth), are not set properly, in my opinion, for HAM or EHB at
+least ?
+   Best regards.

@@ -1,0 +1,8 @@
+
+    moveq   #20,d0
+    rts
+
+    XREF    _Germ
+    dc.l    _Germ
+
+    dc.b    0,'$VER: UIKObj_SPropLift 1.0 (13.06.93)',0

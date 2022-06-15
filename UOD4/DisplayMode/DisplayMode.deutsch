@@ -1,0 +1,81 @@
+NULL_STRING
+
+;
+MODE_TITLE
+Anzeigemodus
+;
+FRAME_TITLE
+ Moduseigenschaften\x20
+;
+MIN_OSCANT
+Min. Größe
+;
+TEXT_OSCANT
+Text Größe
+;
+GFX_OSCANT
+Gfx. Größe
+;
+MAX_OSCANT
+Max. Größe
+;
+CUSTOM_SIZE
+Einstellt
+;
+SHADES
+Farben
+;
+COLORS
+Max. Farben
+;
+S_HAM
+Unterstützt H.A.M.
+;
+S_EXTRA
+Unterstützt EXTRA HALFBRITE
+;
+COLOR_TITLE
+ Farben\x20
+;
+WIDTH_TITLE
+Breite
+;
+HEIGHT_TITLE
+Höhe
+;
+PALLOWRESLACED
+PAL:LowRes Interlace
+;
+PALLOWRES
+PAL:LowRes
+;
+PALHIGHRESLACED
+PAL:HighRes Interlace
+;
+PALHIGHRES
+PAL:HighRes
+;
+NTSCLOWRESLACED
+NTSC:LowRes Interlace
+;
+NTSCLOWRES
+NTSC:LowRes
+;
+NTSCHIGHRESLACED
+NTSC:HighRes Interlace
+;
+NTSCHIGHRES
+NTSC:HighRes
+;
+IS_LACED
+Interlace/Zeilsp.
+;
+IS_ECS
+Benötigt ECS
+;
+IS_GENLOCK
+Unterstützt Genlock
+;
+IS_DRAGGABLE
+Ziehbar
+;

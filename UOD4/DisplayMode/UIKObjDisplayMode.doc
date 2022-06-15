@@ -1,0 +1,89 @@
+*******************************************************************************
+*                                                                             *
+* UIK's UIKObjDisplayMode                                                     *
+*                                                                             *
+* Explications sur l'objet UIKOBJ_DisplayInfo, v1.00 (29/8/92)                *
+*                                                                             *
+* Created 22/7/92 Frédéric DENIS, "ß release" Software Design.                *
+*                                                                             *
+*******************************************************************************
+
+Introduction :
+~~~~~~~~~~~~~~
+
+NOTE IMPORTANTE : la version 0.7 est une ßversion, pas completement testee,
+et donc surement buggee quelquepart, alors, regardez-le, mais ne l'utilisez pas
+encore ! (entre autres, je perds ~1268 octets a chaque fois...)
+
+
+   Vous avez sans doute déjà vu le programme ScreenMode des préférences du 2.0.
+Eh bien voici mon interpretation de la chose...
+
+   La version courante ne fonctionne que pour le 2.0, mais je vais bientôt
+tout faire pour le 1.3.
+   Voyons comment ça se présente :
+   - Un superbe objet liste, qui contient tous les modes disponibles dans le
+     système
+   - Une autre liste qui contient le choix possible de couleurs pour le mode
+     courant.
+   - Un beau cadre, où on trouve des informations intéressantes, comme les
+     tailles des overscans des préférences, le nombre de couleurs maximum,
+     le nombre de couleur pour la palette (pour les nouveaux modes ECS)...
+   - des gadgets permettant de donner la taille en fonction des differents
+     overscans...
+   - et puis des string gadgets pour pouvoir regler la taille au pixel pres,
+     quel luxe !
+
+Bon, passons au fonctionnement de la bete. Notre sujet de conversation
+fonctionne un peu (mais de loin...) comme le fileselector, c'est a dire
+qu'il va appeler les fonctions qu'on lui aura donnees, quand on clique sur
+OK ou Cancel. La fonction pour OK recevra comme parametres un chouette pointeur
+sur la structure de l'objet, et un autre chouette pointeur sur une structure
+ModeInfo, qui contient toutes les donnees a mon sens necessaires pour definir
+un ecran. La fonction pour Cancel ne recevra qu'un chouette pointeur sur
+la structure de l'objet, mias c'est tout de meme mieux que rien.
+C'est tout pour les sorties, voyons maintenant les entrees...
+La, on trouve donc les tags pour passer les pointeurs des fonctions pour OK
+et pour Cancel. Pour la version courante (v0.7) il sont indispensables, sinon,
+gara au gourou! (tiens, un 'a' rebelle...)(cherchez pas...)
+Ensuite, on passe l'offset de la premiere des chaines destinees a l'objet.
+Il faut exactement et dans cet ordre les chaines suivantes (en francais, debrouillez
+vous pour le reste) :
+    " Propriétés ",                 Pour le Frame
+    "OvScan min.",                  Gadget et info overscan mini
+    "OvScan texte",                                         texte
+    "OvScan graph.",                                        graphisme
+    "OvScan max.",                                          maxi
+    "Autre taille",                 pour le gadget permettant de definir la taille au pixel pres
+    "Palette",                      infos sur le nombre de couleurs possibles (ex : 4096)
+    "Max. couleurs",                infos nombre de couleurs maxi
+    "Accepte le H.A.M.",            infos ...
+    "Accepte l'EXTRA HALFBRITE",    idem ...
+    " Couleurs ",                   titre de la liste de choix des couleurs
+    "Largeur :",                    titre stringgadget pour la... largeur, gagne!
+    "Hauteur :",                    idem pour la hauteur...
+
+Bon, il faut ensuite (mais ca, c'est optionnel) un pointeur sur une structure ModeInfo, qui
+servira pour le premier affichage de l'objet (histoire de ne pas toujours commencer par le
+debut de la liste...)
+pour les autres tags, attendez un peu la prochaine version...
+
+Vouala, c'est tout...
+
+********************************************************************************************
+Changements apportes par la version 1.00 :
+
+   - Un bug au niveau des boutons pour les overscans a ete corrige. Quand un bouton autre
+     que Custom est choisi, tout changement dans la liste des modes va maintemant modifier
+     les strgads Width et Height.
+   - Support pour le 1.3. (il fait la difference entre le PAL et le NTSC).
+   - Du fait du changement des automates de UIK, rajout du flag Box_Filled pour les boutons
+     contenant du texte.
+   - Changement de la taille des lignes de texte, pour une fonte plus grosse.
+   - L'objet est maintenant son propre master. Il n'a donc plus besoin de l'offset pour ses
+     chaines. Il accepte aussi un catalogue pour la localisation.
+
+********************************************************************************************
+P.S.: je travaille dessus pour le 1.3, et pour d'autres possibilites, comme
+      celle de pouvoir empecher certains modes (genre HAM, EHB, pas plus de x couleurs...)
+      alors, patience...
