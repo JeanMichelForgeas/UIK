@@ -1,0 +1,514 @@
+TABLE OF CONTENTS
+
+UIK:Objects/UIKObj_CheckToggle
+UIK:Objects/UIKObj_RadioExclude
+UIK:Objects/UIKObj_Timer
+UIK:Objects/UIKObj_WFileButton
+UIK:Objects/UIKObj_WFontButton
+UIK:Objects/UIKObj_WinFileSel
+UIK:Objects/UIKObj_WinFontSel
+UIK:Objects/UIKObj_CheckToggle
+    FUNCTION
+        Même fonctionnalité que l'objet UIKObj_Toggle mais propose un look
+        proche de celui de la gadtools.library.
+        Peut prendre l'aspect d'un "radio" bouton, ou des images fournies par
+        le programmeur.
+
+    STD EVENTS
+        Les mêmes que "UIKObj_Boolean" :
+        IDCMP_GADGETDOWN - quand clique dessus avec le bouton gauche
+        IDCMP_MOUSEMOVE  - quand activé et que la souris se déplace
+        IDCMP_GADGETUP   - quand activé et qu'on relâche le bouton gauche
+        IDCMP_INTUITICKS - quand activé, tous les dixièmes de seconde
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_OBJCheck...
+        UIKTAG_OBJCheck_Image1
+          Pointeur sur une UIKBitMap pour l'état non sélectionné dans un
+          afichage de ratio 1.
+        UIKTAG_OBJCheck_AltImage1
+          Pointeur sur une UIKBitMap pour l'état sélectionné dans un afichage
+          de ratio 1.
+        UIKTAG_OBJCheck_Image2
+          Pointeur sur une UIKBitMap pour l'état non sélectionné dans un
+          afichage de ratio 2.
+        UIKTAG_OBJCheck_AltImage2
+          Pointeur sur une UIKBitMap pour l'état sélectionné dans un afichage
+          de ratio 2.
+
+        Check Flags
+        UIKTAG_OBJCheckFl_Radio         FALSE
+          Si TRUE, prend l'aspect d'un bouton "radio".
+
+    STRUCTURE
+        struct UIKObjCheckToggle
+
+    PUBLIC FUNCTIONS
+        UIKFUNC_Check_Select
+          Fonction pour mettre par programme l'objet dans l'état sélectionné.
+          Exemple :
+              UIK_CallObjectFunc( checkobj, UIKFUNC_Check_Select, 0, 0 );
+
+        UIKFUNC_Check_Unselect
+          Fonction pour mettre par programme l'objet dans l'état non
+          sélectionné. Exemple :
+              UIK_CallObjectFunc( checkobj, UIKFUNC_Check_Unselect, 0, 0 );
+
+
+UIK:Objects/UIKObj_RadioExclude
+    FUNCTION
+        Même fonctionnalité que l'objet UIKObj_MutualExclude mais propose
+        un look proche de celui de la gadtools.library.
+        Peut prendre l'aspect d'un "check" bouton, ou des images fournies par
+        le programmeur.
+
+    STD EVENTS
+        Les mêmes que "UIKObj_Boolean" :
+        IDCMP_GADGETDOWN - quand clique dessus avec le bouton gauche
+        IDCMP_MOUSEMOVE  - quand activé et que la souris se déplace
+        IDCMP_GADGETUP   - quand activé et qu'on relâche le bouton gauche
+        IDCMP_INTUITICKS - quand activé, tous les dixièmes de seconde
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_OBJRadio...
+        UIKTAG_OBJRadio_Image1
+          Pointeur sur une UIKBitMap pour l'état non sélectionné dans un
+          afichage de ratio 1.
+        UIKTAG_OBJRadio_AltImage1
+          Pointeur sur une UIKBitMap pour l'état sélectionné dans un afichage
+          de ratio 1.
+        UIKTAG_OBJRadio_Image2
+          Pointeur sur une UIKBitMap pour l'état non sélectionné dans un
+          afichage de ratio 2.
+        UIKTAG_OBJRadio_AltImage2
+          Pointeur sur une UIKBitMap pour l'état sélectionné dans un afichage
+          de ratio 2.
+
+        Radio Flags
+        UIKTAG_OBJRadioFl_Check         FALSE
+          Si TRUE, prend l'aspect d'un bouton "check".
+
+    STRUCTURE
+        struct UIKObjRadioExclude
+
+    PUBLIC FUNCTIONS
+        UIKFUNC_Radio_Select
+          Fonction pour mettre par programme l'objet dans l'état sélectionné.
+          Exemple :
+              UIK_CallObjectFunc( radioobj, UIKFUNC_Radio_Select, 0, 0 );
+
+
+UIK:Objects/UIKObj_Timer
+    FUNCTION
+        Permet de déclencher l'appel d'une fonction avec un interval de temps.
+        L'interval de temps obtenu est toujours supérieur de quelques dizaines
+        voir centaines de micro-secondes selon le type du processeur, la charge
+        du processeur (nombre de tâches, interruptions),...
+        L'objet timer peut corriger les intervals demandés réellement au fur
+        et à mesure des réveils successifs : le temps passé à attendre est
+        comparé au temps demandé, et la prochaine période d'attente demandée
+        est plus petite ou plus grande selon la correction à apporter.
+        Au fur et à mesure, la durée d'interval moyenne obtenue par le temps
+        total divisé par le nombre d'intervals passés devient égale à la durée
+        demandée.
+        Cette correction est donc utile à chaque fois qu'on est sûr qu'il se
+        produira plusieurs intervals, et qu'on veut que la durée totale soit
+        égale à la durée théorique.
+        Le tag UIKTAG_TimerFl_Correction permet d'activer la correction.
+
+        L'interval de temps peut être changé pendant que le timer est démarré.
+
+        Cet objet permet aussi de chronométrer le temps passé, grâce à ses
+        fonctions publiques UIKFUNC_Timer_GetTime et UIKFUNC_Timer_GetElapsed.
+
+
+    STD EVENTS
+        Aucun.
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_Timer...
+        UIKTAG_Timer_TimeFunc
+          Pointeur sur la fonction à appeler à la fin de chaque interval.
+        UIKTAG_Timer_Seconds
+          Nombre de secondes dans l'interval demandé.
+        UIKTAG_Timer_Micros
+          Nombre de micro-secondes dans l'interval demandé.
+        UIKTAG_Timer_Unit
+          Type du timer demandé : UNIT_MICROHZ ou UNIT_VBLANK. Sur une longue
+          période temps le UNIT_VBLANK est plus précis mais si plusieurs
+          intervals sont utilisés à l'intérieur de la durée, le UNIT_MICROHZ
+          utilisé avec la correction devient aussi précis.
+          Le UNIT_VBLANK n'a qu'une résolution de 1/50 ème de seconde et est
+          donc inefficace pour une précision de moins du 10ème de seconde.
+
+        Timer Flags
+        UIKTAG_TimerFl_Correction       FALSE
+          Active la correction automatique sur chaque interval.
+
+    STRUCTURE
+        struct UIKObjTimer
+
+    CALLBACKS
+        Fonction mise en place grâce au tag UIKTAG_Timer_TimeFunc.
+        A chaque fois que l'interval de temps est atteind, la fonction que le
+        programmeur a indiquée est appelée avec en paramètre un pointeur sur
+        l'objet Timer. Exemple :
+            ... /* lors du UIK_AddObject() */
+            { UIKTAG_Timer_TimeFunc, IntervalFunc, }
+            ...
+        void IntervalFunc( struct UIKObjTimer *timer )
+        {
+            printf( "temps écoulé\n" );
+        }
+
+    PUBLIC FUNCTIONS
+        UIKFUNC_Timer_SetInterval
+          Fonction permettant de changer l'interval, que le timer soit démarré
+          ou non. Si le timer est démarré les champs EventCounter et TotalTime
+          ne sont pas mis à zéro et sont incrémentés depuis le démarrage
+          jusqu'à l'arrêt du Timer.
+          Par contre le champ StartTime est initialisé à la valeur courante du
+          temps Système.
+          Exemple :
+          UIK_CallObjectFunc( timer, UIKFUNC_Timer_SetInterval,
+                                                        secondes, micros ) );
+          timer    - pointeur sur l'objet UIKObj_Timer
+          secondes - nombre de secondes voulues pour la longueur de l'interval
+          micros   - nombre de micro-secondes pour la longueur de l'interval
+          Si le timer est déjà démarré il ne le sera pas à nouveau.
+
+        UIKFUNC_Timer_Start
+          Démarre le timer. On peut démarrer et arrêter le timer autant de
+          fois que l'on veut. Exemple :
+          UIK_CallObjectFunc( timer, UIKFUNC_Timer_Start, 0,0 ) );
+          timer - pointeur sur l'objet UIKObj_Timer
+          Si le timer est déjà démarré il ne le sera pas à nouveau.
+
+        UIKFUNC_Timer_Stop
+          Arrête le timer. On peut démarrer et arrêter le timer autant de
+          fois que l'on veut. Exemple :
+          UIK_CallObjectFunc( timer, UIKFUNC_Timer_Stop, 0,0 ) );
+          timer - pointeur sur l'objet UIKObj_Timer
+          Si le timer est déjà arrêté il ne le sera pas à nouveau.
+
+        UIKFUNC_Timer_IsStarted
+          Teste si le timer est démarré. La valeur retournée est zéro si il
+          est arrêté et différente de zéro sinon. Exemple :
+          UIK_CallObjectFunc( timer, UIKFUNC_Timer_IsStarted, 0,0 ) );
+          timer - pointeur sur l'objet UIKObj_Timer
+
+        UIKFUNC_Timer_GetTime
+          Demande le temps du Système. Retourne l'adresse d'une structure
+          "timeval" (voir devices/timer.h) contenant le temps Système.
+          Exemple :
+          temps = UIK_CallObjectFunc( timer, UIKFUNC_Timer_GetTime, 0,0 ) );
+          timer - pointeur sur l'objet UIKObj_Timer
+
+        UIKFUNC_Timer_GetElapsed
+          Calcule le temps écoulé entre le temps actuel du Système et le temps
+          contenu dans le champ StartTime. Ce champ est initialisé à chaque
+          démarrage du timer et à chaque changement de la valeur de l'interval.
+          Retourne l'adresse d'une structure "timeval" (voir devices/timer.h)
+          contenant le temps Système. Exemple :
+          écoulé = UIK_CallObjectFunc( timer, UIKFUNC_Timer_GetElapsed, 0,0 ) )
+          timer - pointeur sur l'objet UIKObj_Timer
+
+
+UIK:Objects/UIKObj_WFileButton
+    FUNCTION
+        Cet objet présente à l'utilisateur une zone de saisie et un bouton
+        booléen qui fonctionnent de concert : si l'utilisateur actionne le
+        booléen il s'ajoute à lui-même l'objet UIKObj_WinFileSel (donc une
+        fenêtre et un FileSelector) en l'initialisant sur le chemin contenu
+        dans la zone de saisie. En cas d'action OK, la zone de saisie est
+        réinitialisée avec le résultat provenant du FileSelector.
+        Cet objet est très confortable pour l'utilisateur qui peut soit taper
+        directement le nom de fichier, soit s'aider du FileSelector.
+        Il est très confortable aussi pour le programmeur qui ne fait qu'un
+        seul UIK_AddObject() pour bénéficier de tout ce mécanisme.
+
+    STD EVENTS
+        Aucun.
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_WFB...
+
+        Tags identiques à ceux du FileSelector
+        UIKTAG_WFB_OKFunc
+        UIKTAG_WFB_InitPath
+        UIKTAG_WFB_AssignLst
+        UIKTAG_WFB_AssignList
+        UIKTAG_WFB_Pattern
+
+        Tags propres
+        UIKTAG_WFB_ExtraSpace
+          Nombre de pixels entre la zone de saisie et le bouton.
+        UIKTAG_WFB_ButtonWidth
+          Par défaut la largeur du bouton booléen se règle sur la largeur
+          de son titre. On peut la forcer avec ce tag.
+        UIKTAG_WFB_ButtonTitle
+          Titre du bouton booléen. Index d'un texte dans les tableaux de
+          chaines, ou alors une UIKBitMap (voir UIKTAG_WFBFl_ButtonImage).
+          Par défaut une image standard identique à celle utilisée par certains
+          utilitaires du Système est fournie.
+        UIKTAG_WFB_ButtonAltTitle
+          Titre alterné du bouton booléen. Index d'un texte dans les tableaux
+          de chaines, ou alors une UIKBitMap (voir UIKTAG_WFBFl_ButtonImage).
+        UIKTAG_WFB_ButtonActInactPens
+          Couleurs du bouton, même format qu'avec le tag standard : quatre
+          octets accolés représentant
+            - la couleur du fond à l'état actif
+            - la couleur du fond à l'état inactif
+            - la couleur du texte du titre à l'état actif
+            - la couleur du texte du titre à l'état inactif
+          Exemple :
+            UIKCOLS(UIKCOL_GREY,UIKCOL_GREY,UIKCOL_BLACK,UIKCOL_BLACK)
+
+        UIKTAG_WFB_ButtonShortCut
+          Raccourcis clavier devant activer le bouton. Même format que pour
+          le raccourcis clavier avec le tag standard.
+
+        UIKTAG_WFB_SelectorTitle
+          Titre de la fenêtre comportant le FileSelector. Index d'un texte
+          dans les tableaux de chaines.
+
+        UIKTAG_WFB_SelectorAltTitle
+          Titre de l'écran comportant la fenêtre du FileSelector. Index d'un
+          texte dans les tableaux de chaines.
+
+        Flags identiques à ceux du FileSelector
+        UIKTAG_WFBFl_ReturnReturn       TRUE
+        UIKTAG_WFBFl_OK_IfNotExists     FALSE
+        UIKTAG_WFBFl_DirsOnly           FALSE
+        UIKTAG_WFBFl_ShowIcons          FALSE
+        UIKTAG_WFBFl_StringsTop         FALSE
+
+        Flags propres
+        UIKTAG_WFBFl_StringRight        FALSE
+          Par défaut la zone de saisie (objet UIKObj_String) est à gauche du
+          bouton booléen. Si TRUE elle se place à droite.
+
+        UIKTAG_WFBFl_AutoHeight         TRUE
+          Si FALSE il faut donner une hauteur à cet objet. Par défaut il
+          s'adapte à celle de l'objet UIKObj_String qui lui-même s'adapte
+          à la taille de la fonte utilisée.
+
+        UIKTAG_WFBFl_ButtonImage        FALSE
+          Si TRUE indique qu'on donne des images pour les titres du bouton.
+
+        UIKTAG_WFBFL_ButtonNoPush       FALSE
+          Si TRUE, empêche l'enfoncement visuel du bouton. La couleur de fond
+          et le titre sont toujours changés par l'activation.
+
+    STRUCTURE
+        struct UIKObjWFileBut
+
+    CALLBACKS
+        Fonction mise en place grâce au tag UIKTAG_WFB_OKFunc.
+        Elle est appelée soit quand l'utilisateur tape RETURN dans la zone de
+        saisie, soit quand il clique sur OK dans le FileSelector.
+        C'est le même format que le CallBack de l'objet FileSelector.
+
+
+UIK:Objects/UIKObj_WFontButton
+    FUNCTION
+        Cet objet présente à l'utilisateur deux zones de saisie et un bouton
+        booléen qui fonctionnent de concert : si l'utilisateur actionne le
+        booléen il s'ajoute à lui-même l'objet UIKObj_WinFontSel (donc une
+        fenêtre et un FontSelector) en l'initialisant sur la fonte et sa
+        taille contenues dans les zones de saisie. En cas d'action OK, les
+        zones de saisie sont réinitialisées avec le résultat provenant du
+        FontSelector.
+        Cet objet est très confortable pour l'utilisateur qui peut soit taper
+        directement le nom de la fonte et sa taille, soit s'aider du
+        FontSelector.
+        Il est très confortable aussi pour le programmeur qui ne fait qu'un
+        seul UIK_AddObject() pour bénéficier de tout ce mécanisme.
+
+    STD EVENTS
+        Aucun.
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_WFOB...
+
+        Tags identiques à ceux du FontSelector
+        UIKTAG_WFOB_OKFunc
+        UIKTAG_WFOB_FONTSPATH
+        UIKTAG_WFOB_HighlightFont
+
+        Tags propres
+        UIKTAG_WFOB_ExtraSpace
+          Nombre de pixels entre la zone de saisie et le bouton.
+
+        UIKTAG_WFOB_ButtonWidth
+          Par défaut la largeur du bouton booléen se règle sur la largeur
+          de son titre. On peut la forcer avec ce tag.
+
+        UIKTAG_WFOB_ButtonTitle
+          Titre du bouton booléen. Index d'un texte dans les tableaux de
+          chaines, ou alors une UIKBitMap (voir UIKTAG_WFOBFl_ButtonImage).
+          Par défaut une image standard identique à celle utilisée par certains
+          utilitaires du Système est fournie.
+
+        UIKTAG_WFOB_ButtonAltTitle
+          Titre alterné du bouton booléen. Index d'un texte dans les tableaux
+          de chaines, ou alors une UIKBitMap (voir UIKTAG_WFBFl_ButtonImage).
+
+        UIKTAG_WFOB_ButtonActInactPens
+          Couleurs du bouton, même format qu'avec le tag standard : quatre
+          octets accolés représentant
+            - la couleur du fond à l'état actif
+            - la couleur du fond à l'état inactif
+            - la couleur du texte du titre à l'état actif
+            - la couleur du texte du titre à l'état inactif
+          Exemple :
+            UIKCOLS(UIKCOL_GREY,UIKCOL_GREY,UIKCOL_BLACK,UIKCOL_BLACK)
+
+        UIKTAG_WFOB_ButtonShortCut
+          Raccourcis clavier devant activer le bouton. Même format que pour
+          le raccourcis clavier avec le tag standard.
+
+        UIKTAG_WFOB_SelectorTitle
+          Titre de la fenêtre comportant le FontSelector. Index d'un texte
+          dans les tableaux de chaines.
+
+        UIKTAG_WFOB_SelectorAltTitle
+          Titre de l'écran comportant la fenêtre du FontSelector. Index d'un
+          texte dans les tableaux de chaines.
+
+        Flags identiques à ceux du FontSelector
+        UIKTAG_WFOBFl_PropWidth         TRUE
+        UIKTAG_WFOBFl_FixedWidth        TRUE
+
+        Flags propres
+        UIKTAG_WFOBFl_StringRight       FALSE
+          Par défaut les zones de saisie (objet UIKObj_String) sont à gauche
+          du bouton booléen. Si TRUE elles se placent à droite.
+
+        UIKTAG_WFOBFl_AutoHeight        TRUE
+          Si FALSE il faut donner une hauteur à cet objet. Par défaut il
+          s'adapte à celle de l'objet UIKObj_String qui lui-même s'adapte
+          à la taille de la fonte utilisée.
+
+        UIKTAG_WFOBFl_ButtonImage       FALSE
+          Si TRUE indique qu'on donne des images pour les titres du bouton.
+
+        UIKTAG_WFOBFL_ButtonNoPush      FALSE
+          Si TRUE, empêche l'enfoncement visuel du bouton. La couleur de fond
+          et le titre sont toujours changés par l'activation.
+
+    STRUCTURE
+        struct UIKObjWFontBut
+
+    CALLBACKS
+        Fonction mise en place grâce au tag UIKTAG_WFOB_OKFunc.
+        Elle est appelée soit quand l'utilisateur tape RETURN dans la zone de
+        saisie, soit quand il clique sur OK dans le FontSelector.
+        C'est le même format que le CallBack de l'objet FontSelector.
+
+
+UIK:Objects/UIKObj_WinFileSel
+    FUNCTION
+        Cet objet s'ajoute les objets UIKObj_Window et UIKOBJ_FileSelector.
+        Il rempli donc la même fonction que le FileSelector mais est plus
+        pratique d'emploi.
+        Il va lire/écrire les position et dimension de sa fenêtre, et les
+        dimensions des deux listes dans un fichier de configuration
+        (ENV:UIK/Objects/ObjWinFileSel.prefs et ENVARC:...), ce qui est
+        très pratique pour l'utilisateur final.
+        Le programmeur n'a donc pas à se soucier de lui passer la position
+        et la taille d'ouverture, car c'est l'utilisateur qui les décide.
+        Si la taille d'ouverture est trop grande pour que la fenêtre tienne
+        dans l'écran cet objet redimensionne son objet UIKObj_Window puis
+        essaye une deuxième fois.
+        Ce fichier de configuration est en ASCII et on peut le modifier avec
+        un éditeur de texte. Il est composé de 7 nombres qui signifient dans
+        l'ordre :
+            - Abcisse X de la fenêtre
+            - Ordonnée Y de la fenêtre
+            - Largeur intérieure de la fenêtre
+            - Hauteur intérieure de la fenêtre
+            - Largeur de la liste des unités périphériques
+            - Largeur de la liste des fichiers et répertoires
+            - Indicateur de placement pour les zones de saisie : 
+                    0 = en bas, sinon en haut
+
+    STD EVENTS
+        Aucun.
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_WFS...
+
+        Tags identiques à ceux du FileSelector
+        UIKTAG_WFS_OKFunc
+        UIKTAG_WFS_CancelFunc
+        UIKTAG_WFS_InitPath
+        UIKTAG_WFS_DevFiles
+          Ce Tag est inutile vu que cet objet se dimensionne selon le
+          choix de l'utilisateur. Evitez donc de l'employer.
+        UIKTAG_WFS_AssignLst            FALSE
+        UIKTAG_WFS_Pattern
+
+        Flags identiques à ceux du FileSelector
+        UIKTAG_WFSFl_ReturnReturn       FALSE
+        UIKTAG_WFSFl_OK_IfNotExists     FALSE
+        UIKTAG_WFSFl_DirsOnly           FALSE
+        UIKTAG_WFSFl_ShowIcons          FALSE
+        UIKTAG_WFSFl_StringsTop         FALSE
+
+    STRUCTURE
+        struct UIKObjWinFileSel
+
+    CALLBACKS
+        Ce sont les mêmes CallBacks que ceux du FileSelector sauf qu'ils sont
+        installés par les tags UIKTAG_WFS_OKFunc et UIKTAG_WFS_CancelFunc.
+        Les fonctions reçoivent des pointeurs sur l'objet UIKObj_WinFileSel
+        au lieu du UIKObj_FileSelector.
+
+
+UIK:Objects/UIKObj_WinFontSel
+    FUNCTION
+        Cet objet s'ajoute les objets UIKObj_Window et UIKOBJ_FontSelector.
+        Il rempli donc la même fonction que le FontSelector mais est plus
+        pratique d'emploi.
+        Il va lire/écrire les position et dimension de sa fenêtre dans un
+        fichier de configuration (ENV:UIK/Objects/ObjWinFileSel.prefs et
+        ENVARC:...), ce qui est très pratique pour l'utilisateur final.
+        Le programmeur n'a donc pas à se soucier de lui passer la position
+        et la taille d'ouverture, car c'est l'utilisateur qui les décide.
+        Si la taille d'ouverture est trop grande pour que la fenêtre tienne
+        dans l'écran cet objet redimensionne son objet UIKObj_Window puis
+        essaye une deuxième fois.
+
+    STD EVENTS
+        Aucun.
+
+    TAGS
+        Tous les tags de cet objet commencent par:
+            UIKTAG_...
+
+        Tags identiques à ceux du FontSelector
+        UIKTAG_WFOS_OKFUNC
+        UIKTAG_WFOS_CANCELFUNC
+        UIKTAG_WFOS_FONTSPATH
+        UIKTAG_WFOS_HighlightFont
+
+        Flags identiques à ceux du FontSelector
+        UIKTAG_WFOSFl_PropWidth         TRUE
+        UIKTAG_WFOSFl_FixedWidth        TRUE
+
+    STRUCTURE
+        struct UIKObjWinFontSel
+
+    CALLBACKS
+        Ce sont les mêmes CallBacks que ceux du FontSelector sauf qu'ils sont
+        installés par les tags UIKTAG_WFOS_OKFUNC et UIKTAG_WFOS_CANCELFUNC.
+        Les fonctions reçoivent des pointeurs sur l'objet UIKObj_WinFontSel
+        au lieu du UIKObj_FontSelector.
+
